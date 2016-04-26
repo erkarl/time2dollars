@@ -1,112 +1,90 @@
 import Cycle from '@cycle/core'
 import {Observable} from 'rx'
-import {div, ul, li, makeDOMDriver} from '@cycle/DOM'
-import {intersection, difference, sortBy} from 'lodash'
+import {label, section, h1, div, input, makeDOMDriver} from '@cycle/DOM'
 
-function intent(keydownSource) {
-  return keydownSource
-    .map(ev => ev.code.replace('Key', ''))
-    .filter(str => str.length === 1)
-}
-
-function model(action$) {
-  const initialState = ['A']
-  return action$.startWith(initialState).startWith([]).scan((acc, key) => {
-    const index = acc.indexOf(key)
-    if (index === -1) {
-      return acc.concat(key).sort()
-    }
-    const newAcc = acc.slice()
-    newAcc.splice(index, 1)
-    return newAcc
-  })
-}
-
-function determineDeltaPoints(state$) {
-  return state$.pairwise().flatMap(([before, after]) => {
-    const addedPoints = difference(after, before).map(key =>
-      ({key, value: 0, target: 1})
-    )
-    const removedPoints = difference(before, after).map(key =>
-      ({key, value: 1, target: 0})
-    )
-    const points = addedPoints.concat(removedPoints)
-    return Observable.from(sortBy(points, 'key'))
-  })
-}
-
-function expandAsRenderingFrames(point$) {
-  return point$.flatMapLatest(point =>
-    Observable.interval(10).map(point).take(100)
-  )
-}
-
-function calculateAnimationSteps(point$) {
-  function incorporateNewPoint(oldPoints, newPoint) {
-    const index = oldPoints.findIndex(point => point.key === newPoint.key)
-    let points
-    if (index === -1 && newPoint.target === 1) {
-      points = oldPoints.concat(newPoint)
-    } else {
-      points = oldPoints.slice()
-      points[index] = newPoint
-    }
-    return points
-  }
-
-  function progressEachPoint(oldPoints, newPoints) {
-    return newPoints.map(newPoint => {
-      const target = newPoint.target
-      const oldPoint = oldPoints.find(p => p.key === newPoint.key)
-      const value = !!oldPoint ? oldPoint.value : newPoint.value
-      return {
-        ...newPoint,
-        value: (Math.abs(target - value) < 0.01) ?
-          target :
-          value + (target - value) * 0.05
+function main({DOM}) {
+  let changeHourlyRate$ = DOM.select('.hourly-rate')
+    .events('input')
+    .map(ev => {
+      let value = parseFloat(ev.target.value);
+      if(isNaN(value)){
+        return 0;
+      } else {
+        return value;
       }
-    })
-  }
-
-  return point$.scan((acc, point) => {
-    const newAcc = incorporateNewPoint(acc, point)
-    const progressedAcc = progressEachPoint(acc, newAcc)
-    const sanitizedAcc = progressedAcc.filter(point =>
-      !(point.target === 0 && point.value === 0)
-    )
-    const sortedAcc = sortBy(sanitizedAcc, 'key')
-    return sortedAcc
-  }, [])
-}
-
-function animate(state$) {
-  return state$
-    .let(determineDeltaPoints)
-    .let(expandAsRenderingFrames)
-    .let(calculateAnimationSteps)
-}
-
-function view(state$) {
-  const animatedState$ = animate(state$)
-  const ulStyle = {padding: '0', listStyle: 'none', display: 'flex'}
-  const liStyle = {fontSize: '50px'}
-  return animatedState$.map(animStates =>
-    ul({style: ulStyle}, animStates.map(animState =>
-      li({style: {fontSize: `${animState.value * 50}px`}}, animState.key)
-    ))
-  )
-}
-
-function main(sources) {
-  const key$ = intent(sources.Keydown)
-  const state$ = model(key$)
-  const vtree$ = view(state$)
+    });
+  let changeHoursWorked$ = DOM.select('.hours-worked')
+    .events('input')
+    .map(ev => {
+      let value = parseFloat(ev.target.value);
+      if(isNaN(value)){
+        return 0;
+      } else {
+        return value;
+      }
+    });
+  let minutesWorked$ = DOM.select('.minutes-worked')
+    .events('input')
+    .map(ev => {
+      let value = parseFloat(ev.target.value);
+      if(isNaN(value)){
+        return 0;
+      } else {
+        return value;
+      }
+    });
+  let secondsWorked$ = DOM.select('.seconds-worked')
+    .events('input')
+    .map(ev => {
+      let value = parseFloat(ev.target.value);
+      if(isNaN(value)){
+        return 0;
+      } else {
+        return value;
+      }
+    });
+  let state$ = Observable.combineLatest(
+    changeHourlyRate$.startWith(50),
+    changeHoursWorked$.startWith(40),
+    minutesWorked$.startWith(0),
+    secondsWorked$.startWith(0),
+    (hourlyRate, hoursWorked, minutesWorked, secondsWorked) => {
+      let secondsInMinutes = secondsWorked / 60;
+      let minutesInHours = (secondsInMinutes + minutesWorked) / 60;
+      let convertedHoursWorked = hoursWorked + minutesInHours;
+      let totalSum = hourlyRate * convertedHoursWorked;
+      let convertedTotalSum = Math.round(totalSum * 100) / 100;
+      return {hourlyRate, hoursWorked, minutesWorked, secondsWorked, totalSum: convertedTotalSum};
+    }
+  );
   return {
-    DOM: vtree$,
-  }
+    DOM: state$
+      .map(({hourlyRate, hoursWorked, minutesWorked, secondsWorked, totalSum}) =>
+        div('.container', [
+          section([
+            label('.hourly-rate-label', 'Hourly Rate'),
+            input('.hourly-rate', {type: 'number', value: hourlyRate, min: 1, max: 10000})
+          ]),
+          section([
+            label('.hours-worked-label', 'Hours Worked'),
+            input('.hours-worked', {type: 'number', value: hoursWorked, min: 0, max: 10000})
+          ]),
+          section([
+            label('.minutes-worked-label', 'Minutes Worked'),
+            input('.minutes-worked', {type: 'number', value: minutesWorked, min: 0, max: 60})
+          ]),
+          section([
+            label('.seconds-worked-label', 'Seconds Worked'),
+            input('.seconds-worked', {type: 'number', value: secondsWorked, min: 0, max: 60})
+          ]),
+          h1('Total sum: ' + totalSum + '$')
+      ])
+    ),
+  LOG: state$
+  };
 }
 
 Cycle.run(main, {
-  Keydown: () => Observable.fromEvent(document, 'keydown'),
-  DOM: makeDOMDriver('#app')
+  DOM: makeDOMDriver('#app'),
+  LOG: msg$ => { msg$.subscribe(msg => console.log(msg)) }
 })
