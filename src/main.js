@@ -1,6 +1,9 @@
 import Cycle from '@cycle/core'
 import {Observable} from 'rx'
 import {label, section, h1, div, input, makeDOMDriver} from '@cycle/DOM'
+import 'materialize-css/bin/materialize.css'
+import 'materialize-css/bin/materialize.js'
+
 
 function main({DOM}) {
   let changeHourlyRate$ = DOM.select('.hourly-rate')
@@ -66,18 +69,18 @@ function main({DOM}) {
             input('.hourly-rate', {type: 'number', value: hourlyRate, min: 1, max: 10000})
           ]),
           section([
-            label('.hours-worked-label', 'Hours Worked'),
+            label('.hours-worked-label', 'Hours'),
             input('.hours-worked', {type: 'number', value: hoursWorked, min: 0, max: 10000})
           ]),
           section([
-            label('.minutes-worked-label', 'Minutes Worked'),
+            label('.minutes-worked-label', 'Minutes'),
             input('.minutes-worked', {type: 'number', value: minutesWorked, min: 0, max: 60})
           ]),
           section([
-            label('.seconds-worked-label', 'Seconds Worked'),
+            label('.seconds-worked-label', 'Seconds'),
             input('.seconds-worked', {type: 'number', value: secondsWorked, min: 0, max: 60})
           ]),
-          h1('Total sum: ' + totalSum + '$')
+          h1('Total: ' + totalSum + '$')
       ])
     ),
   LOG: state$
