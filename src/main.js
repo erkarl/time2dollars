@@ -1,9 +1,6 @@
 import Cycle from '@cycle/core'
 import {Observable} from 'rx'
 import {label, section, h1, div, input, makeDOMDriver} from '@cycle/DOM'
-import 'materialize-css/bin/materialize.css'
-import 'materialize-css/bin/materialize.js'
-
 
 function main({DOM}) {
   let changeHourlyRate$ = DOM.select('.hourly-rate')

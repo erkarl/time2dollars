@@ -11,12 +11,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Hello Cycle',
+      title: 'Time to Dollars',
       template: 'src/index.ejs',
-    }),
-    new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery"
     })
   ],
   module: {
@@ -25,7 +21,7 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel-loader',
         query: {
-          presets: ['stage-2', 'es2015']
+          presets: ['es2015']
         }
       },
       {
