@@ -11,9 +11,10 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Time to Dollars',
-      template: 'src/index.ejs',
-    })
+      template: 'src/index.html',
+      inject: 'body',
+      filename: 'index.html'
+    }),
   ],
   module: {
     loaders: [
