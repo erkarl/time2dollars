@@ -3,11 +3,16 @@ var path = require("path");
 var webpack = require("webpack");
 
 module.exports = {
-  entry: './src/main.js',
+  entry: {
+    app: [
+      path.join(__dirname, 'src/main')
+    ]
+  },
   output: {
-    path: path.resolve(__dirname, "build"),
-    publicPath: "/assets/",
-    filename: 'bundle.js'
+    filename: '[name].js',
+    pathInfo: true,
+    path: path.join(__dirname, './build/'),
+    publicPath: '/'
   },
   plugins: [
     new HtmlWebpackPlugin({

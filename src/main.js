@@ -1,6 +1,8 @@
 import Cycle from '@cycle/core'
 import {Observable} from 'rx'
 import {label, section, h1, div, input, makeDOMDriver} from '@cycle/DOM'
+import 'material-design-lite/material.min.css'
+import 'material-design-lite/material.min.js'
 
 function main({DOM}) {
   let changeHourlyRate$ = DOM.select('.hourly-rate')
@@ -62,20 +64,26 @@ function main({DOM}) {
       .map(({hourlyRate, hoursWorked, minutesWorked, secondsWorked, totalSum}) =>
         div('.container', [
           section([
-            label('.hourly-rate-label', 'Hourly Rate'),
-            input('.hourly-rate', {type: 'number', value: hourlyRate, min: 1, max: 10000})
+            div('.mdl-textfield .mdl-js-textfield .mdl-textfield--floating-label', [
+              label('.hourly-rate-label', 'Hourly Rate'),
+              input('.hourly-rate', {type: 'text', value: hourlyRate})
+            ])
           ]),
           section([
-            label('.hours-worked-label', 'Hours'),
-            input('.hours-worked', {type: 'number', value: hoursWorked, min: 0, max: 10000})
+            div('.mdl-textfield .mdl-js-textfield .mdl-textfield--floating-label', [
+              label('.hours-worked-label', 'Hours'),
+              input('.hours-worked', {type: 'text', value: hoursWorked})
+            ])
           ]),
           section([
-            label('.minutes-worked-label', 'Minutes'),
-            input('.minutes-worked', {type: 'number', value: minutesWorked, min: 0, max: 60})
+            div('.mdl-textfield .mdl-js-textfield .mdl-textfield--floating-label', [
+              label('.minutes-worked-label', 'Minutes'),
+              input('.minutes-worked', {type: 'text', value: minutesWorked})
+            ])
           ]),
-          section([
-            label('.seconds-worked-label', 'Seconds'),
-            input('.seconds-worked', {type: 'number', value: secondsWorked, min: 0, max: 60})
+          div('.mdl-textfield .mdl-js-textfield .mdl-textfield--floating-label', [
+            input('.seconds-worked .mdl-textfield__input #test', {type: 'text', value: secondsWorked}),
+            label('.seconds-worked-label .mdl-textfield__label', { attributes: { for: 'test' } }, 'Seconds')
           ]),
           h1('Total: ' + totalSum + '$')
       ])
@@ -86,5 +94,9 @@ function main({DOM}) {
 
 Cycle.run(main, {
   DOM: makeDOMDriver('#app'),
-  LOG: msg$ => { msg$.subscribe(msg => console.log(msg)) }
+  LOG: msg$ => { msg$.subscribe(msg => {
+      componentHandler.upgradeDom();
+      console.log(msg);
+    });
+  }
 })
