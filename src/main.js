@@ -1,10 +1,12 @@
 import Cycle from '@cycle/core'
 import {Observable} from 'rx'
-import {label, section, h1, div, input, makeDOMDriver} from '@cycle/DOM'
+import {label, span, section, h1, div, input, makeDOMDriver} from '@cycle/DOM'
 import 'material-design-lite/material.min.css'
 import 'material-design-lite/material.min.js'
+import numberInput from './components/number-input/number-input.js'
 
 function main({DOM}) {
+  let DOMupdated$ = DOM.select(':root').observable.take(1);
   let changeHourlyRate$ = DOM.select('.hourly-rate')
     .events('input')
     .map(ev => {
@@ -56,6 +58,12 @@ function main({DOM}) {
       let convertedHoursWorked = hoursWorked + minutesInHours;
       let totalSum = hourlyRate * convertedHoursWorked;
       let convertedTotalSum = Math.round(totalSum * 100) / 100;
+
+      const zeroToEmpty = (value) => {
+        return (value === 0) ? "" : value;
+      };
+
+      secondsWorked = zeroToEmpty(secondsWorked);
       return {hourlyRate, hoursWorked, minutesWorked, secondsWorked, totalSum: convertedTotalSum};
     }
   );
@@ -82,21 +90,26 @@ function main({DOM}) {
             ])
           ]),
           div('.mdl-textfield .mdl-js-textfield .mdl-textfield--floating-label', [
-            input('.seconds-worked .mdl-textfield__input #test', {type: 'text', value: secondsWorked}),
-            label('.seconds-worked-label .mdl-textfield__label', { attributes: { for: 'test' } }, 'Seconds')
+            input('.seconds-worked .mdl-textfield__input #test', {type: 'text', value: secondsWorked, pattern: "-?[0-9]*(\.[0-9]+)?"}),
+            label('.seconds-worked-label .mdl-textfield__label', { attributes: { for: 'test' } }, 'Seconds'),
           ]),
           h1('Total: ' + totalSum + '$')
       ])
     ),
-  LOG: state$
+  LOG: state$,
+  MDLDriver: DOMupdated$
   };
 }
 
 Cycle.run(main, {
   DOM: makeDOMDriver('#app'),
-  LOG: msg$ => { msg$.subscribe(msg => {
+  MDLDriver: DOMupdated$ => { DOMupdated$.subscribe(updatedDOM => {
       componentHandler.upgradeDom();
+    });
+  },
+  LOG: msg$ => { msg$.subscribe(msg => {
       console.log(msg);
+      numberInput();
     });
   }
 })
