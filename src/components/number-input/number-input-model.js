@@ -1,7 +1,10 @@
-function model(initialValue$, newValue$) {
-  return initialValue$.concat(newValue$)
+function model(props$, actions) {
+  const initialValue$ = props$.map(props => props.initial).first();
+
+  return initialValue$
+    .concat(actions.newValue$)
     .map(rawInput => {
-      let value = parseFloat(rawInput);
+      const value = parseFloat(rawInput);
       if(isNaN(value)){
         return "";
       } else {

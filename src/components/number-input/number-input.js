@@ -3,18 +3,15 @@ import {div, input, label} from '@cycle/DOM'
 import isolate from '@cycle/isolate'
 import model from './number-input-model'
 import view from './number-input-view'
+import intent from './number-input-intent'
 
 function NumberInput({DOM, props$}) {
-  let initialValue$ = props$.map(props => props.initial).first();
-
-  let newValue$ = DOM.select('.number-input')
-    .events('input')
-    .map(ev => ev.target.value)
-
-  let value$ = model(initialValue$, newValue$);
+  const actions = intent(DOM);
+  const value$ = model(props$, actions);
+  const vtree$ = view(props$, value$);
 
   return {
-    DOM: view(props$, value$),
+    DOM: vtree$,
     value$
   };
 };
