@@ -1,6 +1,7 @@
 import {Observable} from 'rx'
 import {div, input, label} from '@cycle/DOM'
 import isolate from '@cycle/isolate'
+import model from './number-input-model'
 import view from './number-input-view'
 
 function NumberInput({DOM, props$}) {
@@ -8,16 +9,9 @@ function NumberInput({DOM, props$}) {
 
   let newValue$ = DOM.select('.number-input')
     .events('input')
-    .map(ev => {
-      let value = parseFloat(ev.target.value);
-      if(isNaN(value)){
-        return "";
-      } else {
-        return value;
-      }
-    });
+    .map(ev => ev.target.value)
 
-  let value$ = initialValue$.concat(newValue$);
+  let value$ = model(initialValue$, newValue$);
 
   return {
     DOM: view(props$, value$),
