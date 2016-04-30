@@ -1,7 +1,7 @@
 {
-  "name": "hours2dollars",
+  "name": "time2dollars",
   "version": "1.0.0",
-  "description": "Hours to Dollars Converter",
+  "description": "Time to Dollars Calculator",
   "main": "index.js",
   "scripts": {
     "dev": "./node_modules/.bin/webpack-dev-server --hot --config webpack.config.js --inline --progress --profile --colors --watch --display-error-details --display-cached --content-base src/",
@@ -9,7 +9,7 @@
   },
   "keywords": [
     "cyclejs",
-    "hours-to-dollars"
+    "time-to-dollars"
   ],
   "author": "Karl Ranna",
   "license": "MIT",
