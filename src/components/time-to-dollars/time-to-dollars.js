@@ -19,30 +19,17 @@ function TimeToDollars({DOM}) {
     label: 'Seconds', initial: ''
   });
 
-  let hourlyRate = HourlyRateInput({DOM, props$: hourlyRateProps$});
-  let hours = HoursInput({DOM, props$: hoursProps$});
-  let minutes = MinutesInput({DOM, props$: minutesProps$});
-  let seconds = SecondsInput({DOM, props$: secondsProps$});
+  let hourlyRate = NumberInput({DOM, props$: hourlyRateProps$});
+  let hours = NumberInput({DOM, props$: hoursProps$});
+  let minutes = NumberInput({DOM, props$: minutesProps$});
+  let seconds = NumberInput({DOM, props$: secondsProps$});
 
   let state$ = Observable.combineLatest(
     hourlyRate.value$,
     hours.value$,
     minutes.value$,
     seconds.value$,
-    (hourlyRate, hoursWorked, minutesWorked, secondsWorked) => {
-      let secondsInMinutes = secondsWorked / 60;
-      let minutesInHours = (secondsInMinutes + minutesWorked) / 60;
-      let convertedHoursWorked = hoursWorked + minutesInHours;
-      let totalSum = hourlyRate * convertedHoursWorked;
-      let convertedTotalSum = Math.round(totalSum * 100) / 100;
-
-      const zeroToEmpty = (value) => {
-        return (value === 0) ? "" : value;
-      };
-
-      secondsWorked = zeroToEmpty(secondsWorked);
-      return convertedTotalSum;
-    }
+    convertTimeToDollars
   );
 
   return {
