@@ -1,5 +1,5 @@
 import {Observable} from 'rx'
-import {label, span, section, h1, div, input, makeDOMDriver} from '@cycle/DOM'
+import {div, input, label} from '@cycle/DOM'
 
 function NumberInput({DOM, props$}) {
   let initialValue$ = props$.map(props => props.initial).first();
