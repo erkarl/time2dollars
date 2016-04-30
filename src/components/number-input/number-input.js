@@ -1,6 +1,7 @@
 import {Observable} from 'rx'
 import {div, input, label} from '@cycle/DOM'
 import isolate from '@cycle/isolate'
+import view from './number-input-view'
 
 function NumberInput({DOM, props$}) {
   let initialValue$ = props$.map(props => props.initial).first();
@@ -18,20 +19,8 @@ function NumberInput({DOM, props$}) {
 
   let value$ = initialValue$.concat(newValue$);
 
-  let vtree$ = Observable.combineLatest(props$, value$, (props, value) =>
-    div('.number-input-container', [
-      div('.mdl-textfield .mdl-js-textfield .mdl-textfield--floating-label', [
-        input(
-          '.number-input .mdl-textfield__input',
-          {type: 'text', value: value, pattern: "-?[0-9]*(\.[0-9]+)?"}
-        ),
-        label('.number-input-label .mdl-textfield__label', props.label),
-      ])
-    ])
-  );
-
   return {
-    DOM: vtree$,
+    DOM: view(props$, value$),
     value$
   };
 };
