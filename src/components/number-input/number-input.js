@@ -9,7 +9,7 @@ function NumberInput({DOM, props$}) {
     .map(ev => {
       let value = parseFloat(ev.target.value);
       if(isNaN(value)){
-        return 0;
+        return "";
       } else {
         return value;
       }
