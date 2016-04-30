@@ -1,11 +1,11 @@
 import {Observable} from 'rx'
 import NumberInput from '../../components/number-input/number-input'
-import convertTimeToDollars from './converter'
 import model from './time-to-dollars-model'
 import view from './time-to-dollars-view'
+import intent from './time-to-dollars-intent'
 
 function TimeToDollars({DOM}) {
-  const DOMupdated$ = DOM.select(':root').observable.take(1);
+  const actions = intent(DOM);
 
   const hourlyRateProps$ = Observable.just({
     label: 'Hourly Rate', initial: 50
@@ -42,7 +42,7 @@ function TimeToDollars({DOM}) {
 
   return {
     DOM: vtree$,
-    MDLDriver: DOMupdated$
+    MDLDriver: actions.DOMupdated$
   };
 }
 
