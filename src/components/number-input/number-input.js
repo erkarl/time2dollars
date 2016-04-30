@@ -1,5 +1,6 @@
 import {Observable} from 'rx'
 import {div, input, label} from '@cycle/DOM'
+import isolate from '@cycle/isolate'
 
 function NumberInput({DOM, props$}) {
   let initialValue$ = props$.map(props => props.initial).first();
@@ -35,4 +36,8 @@ function NumberInput({DOM, props$}) {
   };
 };
 
-export default NumberInput;
+function IsolatedNumberInput(sources) {
+  return isolate(NumberInput)(sources)
+}
+
+export default IsolatedNumberInput;

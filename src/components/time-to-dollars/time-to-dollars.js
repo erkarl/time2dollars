@@ -1,15 +1,10 @@
 import {Observable} from 'rx'
-import isolate from '@cycle/isolate'
 import {h1, div} from '@cycle/DOM'
 import NumberInput from '../../components/number-input/number-input'
+import convertTimeToDollars from './converter'
 
 function TimeToDollars({DOM}) {
   let DOMupdated$ = DOM.select(':root').observable.take(1);
-
-  let HourlyRateInput = isolate(NumberInput);
-  let HoursInput = isolate(NumberInput);
-  let MinutesInput = isolate(NumberInput);
-  let SecondsInput = isolate(NumberInput);
 
   let hourlyRateProps$ = Observable.just({
     label: 'Hourly Rate', initial: 50
