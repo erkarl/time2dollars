@@ -7,6 +7,10 @@
     "dev": "./node_modules/.bin/webpack-dev-server --hot --config webpack.config.js --inline --progress --profile --colors --watch --display-error-details --display-cached --content-base src/",
     "test": "testem"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erkarl/time2dollars.git"
+  },
   "keywords": [
     "cyclejs",
     "time-to-dollars"
