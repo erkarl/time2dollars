@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "./node_modules/.bin/webpack-dev-server --hot --config webpack.config.js --inline --progress --profile --colors --watch --display-error-details --display-cached --content-base src/",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "testem"
   },
   "keywords": [
     "cyclejs",
@@ -28,6 +28,7 @@
     "file-loader": "^0.8.5",
     "html-webpack-plugin": "^2.15.0",
     "style-loader": "^0.13.1",
+    "testem": "^1.6.0",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1"
