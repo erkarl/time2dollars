@@ -32,6 +32,7 @@
     "file-loader": "^0.8.5",
     "html-webpack-plugin": "^2.15.0",
     "style-loader": "^0.13.1",
+    "tape": "^4.5.1",
     "testem": "^1.6.0",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.14",
