@@ -15,7 +15,7 @@ function view(total$, hourlyRate$, hours$, minutes$, seconds$) {
           hoursVTree,
           minutesVTree,
           secondsVTree,
-          h1('Total: ' + totalSum + '$')
+          h1('Total: $' + totalSum)
         ])
     )
 }

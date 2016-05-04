@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "./node_modules/.bin/webpack-dev-server --hot --config webpack.config.js --inline --progress --profile --colors --watch --display-error-details --display-cached --content-base src/",
+    "test": "./node_modules/.bin/karma start",
     "clean": "rm -Rf build/"
   },
   "repository": {
@@ -32,6 +33,9 @@
     "css-loader": "^0.23.1",
     "file-loader": "^0.8.5",
     "html-webpack-plugin": "^2.15.0",
+    "karma": "^0.13.22",
+    "karma-mocha": "^1.0.1",
+    "karma-webpack": "^1.7.0",
     "mocha": "^2.4.5",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
