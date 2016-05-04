@@ -1,5 +1,5 @@
 <h1>
-Time 2 Dollars
+Time to Dollars
 </h1>
 Easily convert time into dollars based on hourly rate. Live example available at [timetodollars.xyz](http://timetodollars.xyz/)
 
