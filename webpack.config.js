@@ -3,6 +3,7 @@ var path = require("path");
 var webpack = require("webpack");
 
 module.exports = {
+  devtool: 'eval-source-map',
   entry: {
     app: [
       path.join(__dirname, 'src/main')
@@ -21,6 +22,10 @@ module.exports = {
       filename: 'index.html'
     }),
   ],
+  resolve: {
+    extensions: ['', '.js'],
+    modulesDirectories: ['src', 'node_modules']
+  },
   module: {
     loaders: [
       {
