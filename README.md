@@ -11,7 +11,7 @@ npm install
 Start development server
 
 ```
-npm run dev
+npm start
 ```
 
 Navigate to `http://localhost:8080/`
