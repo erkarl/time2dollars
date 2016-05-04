@@ -4,7 +4,7 @@ import {div, input, label} from '@cycle/DOM'
 function renderInputField(value) {
   return input('.number-input .mdl-textfield__input',
     {
-      type: 'number',
+      type: 'tel',
       attributes: {inputmode: "numeric"},
       value: value,
       pattern: "-?[0-9]*(\.[0-9]+)?"
