@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "./node_modules/.bin/webpack-dev-server --hot --config webpack.config.js --inline --progress --profile --colors --watch --display-error-details --display-cached --content-base src/",
-    "test": "./node_modules/.bin/karma start",
+    "test": "./node_modules/.bin/karma start --single-run --browsers PhantomJS",
+    "test:server": "./node_modules/.bin/karma start",
     "build": "npm run clean && npm run build:production",
     "build:production": "webpack --progress --colors --config webpack.production.config.js",
     "clean": "rm -Rf build/"
@@ -37,8 +38,10 @@
     "html-webpack-plugin": "^2.15.0",
     "karma": "^0.13.22",
     "karma-mocha": "^1.0.1",
+    "karma-phantomjs-launcher": "^1.0.0",
     "karma-webpack": "^1.7.0",
     "mocha": "^2.4.5",
+    "phantomjs-prebuilt": "^2.1.7",
     "style-loader": "^0.13.1",
     "surge": "^0.18.0",
     "url-loader": "^0.5.7",
