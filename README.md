@@ -1,6 +1,6 @@
-<h1>
-Time to Dollars
-</h1>
+# Time to Dollars
+[![Build Status](https://travis-ci.org/erkarl/time2dollars.svg?branch=master)](https://travis-ci.org/erkarl/time2dollars)
+
 Easily convert time into dollars based on hourly rate. Live example available at [timetodollars.xyz](http://timetodollars.xyz/)
 
 ### Install

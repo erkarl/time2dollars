@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "./node_modules/.bin/webpack-dev-server --hot --config webpack.config.js --inline --progress --profile --colors --watch --display-error-details --display-cached --content-base src/",
-    "test": "./node_modules/.bin/karma start --single-run --browsers PhantomJS",
+    "test": "./node_modules/.bin/karma start --single-run --browsers PhantomJS --log-level debug",
     "test:server": "./node_modules/.bin/karma start",
     "build": "npm run clean && npm run build:production",
     "build:production": "webpack --progress --colors --config webpack.production.config.js",
