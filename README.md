@@ -27,6 +27,11 @@ npm run test:server
 
 Navigate to `http://localhost:9876/`
 
+##### Test server for headless development
+```
+npm run test:server:headless
+```
+
 ##### Run tests once headlessly (for CI)
 ```
 npm test
