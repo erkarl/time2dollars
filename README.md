@@ -42,4 +42,4 @@ npm test
 npm run build
 ```
 
-Cleans and builds production ready assets into `build` folder.
+Builds production ready assets into `build` folder.
