@@ -1,5 +1,5 @@
 import {Observable} from 'rx'
-import {div, input, label} from '@cycle/DOM'
+import {div, input, label} from '@cycle/dom'
 import isolate from '@cycle/isolate'
 import model from './number-input-model'
 import view from './number-input-view'

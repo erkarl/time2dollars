@@ -1,5 +1,5 @@
 import {Observable} from 'rx'
-import {h1, div} from '@cycle/DOM'
+import {h1, div} from '@cycle/dom'
 
 function view(total$, hourlyRate$, hours$, minutes$, seconds$) {
   return Observable
