@@ -2,7 +2,6 @@
   "name": "time2dollars",
   "version": "1.0.0",
   "description": "Time to Dollars Calculator",
-  "main": "index.js",
   "scripts": {
     "start": "./node_modules/.bin/webpack-dev-server --hot --config webpack.config.js --inline --progress --profile --colors --watch --display-error-details --display-cached --content-base src/",
     "test": "./node_modules/.bin/karma start --single-run --browsers PhantomJS",
