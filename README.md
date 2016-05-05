@@ -19,11 +19,18 @@ npm start
 Navigate to `http://localhost:8080/`
 
 #### Tests
+
+##### Test server for development
 ```
-npm test
+npm run test:server
 ```
 
 Navigate to `http://localhost:9876/`
+
+##### Run tests once headlessly (for CI)
+```
+npm test
+```
 
 #### Build for production
 ```
