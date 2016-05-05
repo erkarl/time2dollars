@@ -1,7 +1,7 @@
 import {assert} from 'chai'
 import {run} from '@cycle/core'
 import {div, h1, makeDOMDriver} from '@cycle/dom'
-import {Observable} from 'Rx'
+import {Observable} from 'rx'
 import createRenderTarget from '../../../utils/test/create-render-target'
 import TimeToDollars from '../time-to-dollars'
 
