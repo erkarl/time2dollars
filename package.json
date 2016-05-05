@@ -37,6 +37,7 @@
     "file-loader": "^0.8.5",
     "html-webpack-plugin": "^2.15.0",
     "karma": "^0.13.22",
+    "karma-chai": "^0.1.0",
     "karma-mocha": "^1.0.1",
     "karma-phantomjs-launcher": "^1.0.0",
     "karma-webpack": "^1.7.0",

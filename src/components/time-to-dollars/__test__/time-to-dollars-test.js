@@ -18,7 +18,7 @@ describe('TimeToDollars', function() {
       .take(1)
       .map(element => element[0].textContent)
       .subscribe(total => {
-        assert.equal(total, "Total: $2000");
+        expect(total).to.eql("Total: $2000");
       });
   });
 });
