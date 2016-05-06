@@ -1,5 +1,5 @@
 import memo from 'memo-is'
-import convertTimeToDollars from '../converter'
+import convertTimeToDollars from '../time-to-dollars-converter'
 
 describe('TimeToDollars-Converter', function() {
   let hourlyRate = memo().is(function(){

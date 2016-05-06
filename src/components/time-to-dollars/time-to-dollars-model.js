@@ -1,5 +1,5 @@
 import {Observable} from 'rx'
-import convertTimeToDollars from './converter'
+import convertTimeToDollars from './time-to-dollars-converter'
 
 function model(hourlyRate$, hours$, minutes$, seconds$) {
   return Observable.combineLatest(
