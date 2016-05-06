@@ -1,11 +1,10 @@
-import {assert} from 'chai'
 import {run} from '@cycle/core'
 import {div, h1, makeDOMDriver} from '@cycle/dom'
 import {Observable} from 'rx'
 import createRenderTarget from '../../../utils/test/create-render-target'
 import TimeToDollars from '../time-to-dollars'
 
-describe('TimeToDollars', function() {
+describe('TimeToDollars-View', function() {
 
   it('displays correct result with default props', function () {
 

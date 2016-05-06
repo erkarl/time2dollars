@@ -1,7 +1,6 @@
 import memo from 'memo-is'
 import model from '../time-to-dollars-model'
-import {TestScheduler} from 'rx'
-import {ReactiveTest} from 'rx'
+import {TestScheduler, ReactiveTest} from 'rx'
 
 describe('TimeToDollars-Model', function() {
   let onNext = ReactiveTest.onNext;
