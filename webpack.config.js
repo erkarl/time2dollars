@@ -6,6 +6,8 @@ module.exports = {
   devtool: 'eval-source-map',
   entry: {
     app: [
+      'webpack-dev-server/client',
+      'webpack/hot/only-dev-server',
       path.join(__dirname, 'src/main')
     ]
   },
@@ -21,20 +23,22 @@ module.exports = {
       inject: 'body',
       filename: 'index.html'
     }),
+    new webpack.NoErrorsPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.IgnorePlugin(/most-adapter/) // for adaperts not installed
   ],
   resolve: {
     extensions: ['', '.js'],
     modulesDirectories: ['src', 'node_modules']
   },
+  devServer: {
+    hot: true
+  },
   module: {
     loaders: [
       {
         test: /\.js$/,
-        loader: 'babel-loader',
-        query: {
-          compact: false,
-          presets: ['es2015']
-        }
+        loader: 'babel'
       },
       {
         test: /\.css$/,

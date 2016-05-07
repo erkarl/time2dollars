@@ -1,0 +1,9 @@
+{
+  "plugins": [
+    ["cycle-hmr", {
+      "include": "**/cycles/**.js"
+    }]
+  ],
+  "compact": false,
+  "presets": ['es2015']
+}
