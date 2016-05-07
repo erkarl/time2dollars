@@ -43,3 +43,6 @@ npm run build
 ```
 
 Builds production ready assets into `build` folder.
+
+### License
+This project is licensed under the [MIT License](LICENSE).
