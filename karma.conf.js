@@ -3,7 +3,7 @@ webpackConfig.entry = {};
 
 module.exports = function(config) {
   config.set({
-    frameworks: ['mocha', 'chai'],
+    frameworks: ['mocha', 'chai', 'sinon'],
 
     files: [
       'src/**/*-test.js'
