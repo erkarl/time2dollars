@@ -6,7 +6,7 @@ import TimeToDollars from '../time-to-dollars'
 
 describe('TimeToDollars-View', function() {
 
-  it('displays correct result with default props', function () {
+  it('displays correct result with default props', function (done) {
 
     let {sinks, sources} = run(TimeToDollars, {
       DOM: makeDOMDriver(createRenderTarget())
@@ -18,6 +18,7 @@ describe('TimeToDollars-View', function() {
       .map(element => element[0].textContent)
       .subscribe(total => {
         expect(total).to.eql("Total: $2000");
+        done();
       });
   });
 });
